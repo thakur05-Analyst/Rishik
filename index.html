@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Rishik.in | Data & Business Analyst Portfolio</title>
+  <meta name="description" content="Professional portfolio of a Data & Business Analyst specializing in SQL, Python, Power BI, and Advanced Excel. Turning complex data into bottom-line business value.">
+  <meta name="keywords" content="Data Analyst, Business Analyst, Portfolio, SQL, Python, Power BI, Excel, Lead Generation, Dashboard, Data Science">
+  
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="style.css?v=3">
+  
+  <!-- FontAwesome Icons for Dashboard Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Dashboard Header Bar -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="https://rishik.in" class="logo" id="header-logo">
+        <i class="fa-solid fa-chart-line"></i>
+        RISHIK'S <span>PORTFOLIO</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link active" id="nav-hero-link">Overview</a></li>
+          <li><a href="#competencies" class="nav-link" id="nav-competencies-link">Competencies</a></li>
+          <li><a href="#portfolio" class="nav-link" id="nav-portfolio-link">Portfolio</a></li>
+          <li><a href="#contact" class="nav-link" id="nav-contact-link">Query Console</a></li>
+        </ul>
+      </nav>
+      
+      <div class="system-status" id="db-status-widget">
+        <span class="status-dot"></span>
+        <span>DB_CONNECTED: TRUE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 1: Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge" id="hero-status-badge">
+          <i class="fa-solid fa-bolt"></i> Ready for Data Ingestion & Analysis
+        </div>
+        
+        <h1 class="hero-title" id="main-headline">
+          Turning Complex Data Into Actionable Business Decisions
+        </h1>
+        
+        <p class="hero-subtitle" id="main-subheadline">
+          I bridge the gap between raw telemetry and strategic executive decisions using SQL, Python, Power BI, and Advanced Excel. I design automated data pipelines, interactive dashboards, and statistical models that directly impact the bottom line.
+        </p>
+        
+        <!-- Core Data Stack BADGES -->
+        <div class="hero-stack" id="data-stack-container">
+          <div class="stack-pill sql"><i class="fa-solid fa-database"></i> SQL</div>
+          <div class="stack-pill python"><i class="fa-brands fa-python"></i> Python</div>
+          <div class="stack-pill pbi"><i class="fa-solid fa-chart-bar"></i> Power BI</div>
+          <div class="stack-pill excel"><i class="fa-regular fa-file-excel"></i> Advanced Excel</div>
+        </div>
+        
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary" id="cta-primary">
+            <i class="fa-solid fa-download"></i> Download My Data Portfolio Index
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="cta-secondary-linkedin">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="cta-secondary-github">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      
+      <!-- Right Side Dashboard Monitor Simulator -->
+      <div class="hero-monitor float-animation" id="telemetry-panel">
+        <div class="dashboard-panel monitor-panel">
+          <div class="monitor-header">
+            <div class="monitor-title">
+              <i class="fa-solid fa-server"></i> Live Analytics Monitor
+            </div>
+            <div class="monitor-status">
+              <i class="fa-solid fa-circle-check"></i> PIPELINES HEALTHY
+            </div>
+          </div>
+          
+          <div class="monitor-stats-grid">
+            <!-- Stat 1 -->
+            <div class="kpi-mini-card">
+              <div>
+                <div class="kpi-label">AUTOMATED ETL RUNS (MONTHLY)</div>
+                <div class="kpi-value-wrapper">
+                  <span class="kpi-value" id="kpi-runs">142</span>
+                  <span class="kpi-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +12%</span>
+                </div>
+              </div>
+              <div class="kpi-mini-chart">
+                <i class="fa-solid fa-arrow-trend-up" style="color: var(--accent-emerald); font-size: 1.5rem;"></i>
+              </div>
+            </div>
+            
+            <!-- Stat 2 -->
+            <div class="kpi-mini-card">
+              <div>
+                <div class="kpi-label">DATABASE PIPELINE UPTIME</div>
+                <div class="kpi-value-wrapper">
+                  <span class="kpi-value">99.98%</span>
+                  <span class="kpi-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> SLA</span>
+                </div>
+              </div>
+              <div class="kpi-mini-chart">
+                <i class="fa-solid fa-microchip" style="color: var(--accent-cyan); font-size: 1.5rem;"></i>
+              </div>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="kpi-mini-card">
+              <div>
+                <div class="kpi-label">CLEAN DATA RATIO</div>
+                <div class="kpi-value-wrapper">
+                  <span class="kpi-value">100%</span>
+                  <span class="kpi-trend neutral"><i class="fa-solid fa-check-double"></i> Verified</span>
+                </div>
+              </div>
+              <div class="kpi-mini-chart">
+                <i class="fa-solid fa-shield-halved" style="color: var(--accent-blue); font-size: 1.5rem;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Core Competencies -->
+  <section id="competencies" class="competencies">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Core Competencies</h2>
+        <p class="section-subtitle">Technical capability matched with business acumen to deliver measurable business intelligence values.</p>
+      </div>
+      
+      <div class="competencies-horizontal" id="competencies-container">
+        <!-- Competency 1 -->
+        <div class="comp-pill" id="comp-wrangling">
+          <i class="fa-solid fa-filter"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">Data Wrangling</span>
+            <ul class="comp-tech-list">
+              <li>Pandas & NumPy</li>
+              <li>SQL (PostgreSQL)</li>
+              <li>Feature Engineering</li>
+              <li>Data Cleansing</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Competency 2 -->
+        <div class="comp-pill" id="comp-modeling">
+          <i class="fa-solid fa-chart-line"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">Predictive Modeling</span>
+            <ul class="comp-tech-list">
+              <li>Statsmodels & Scikit-Learn</li>
+              <li>Time-Series Forecasting</li>
+              <li>Regression Analysis</li>
+              <li>Customer Segmentation</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Competency 3 -->
+        <div class="comp-pill" id="comp-dashboards">
+          <i class="fa-solid fa-gauge-high"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">KPI Dashboards</span>
+            <ul class="comp-tech-list">
+              <li>Power BI Pro</li>
+              <li>DAX Measures</li>
+              <li>Power Query ETL</li>
+              <li>Executive Reporting</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Competency 4 -->
+        <div class="comp-pill" id="comp-statistics">
+          <i class="fa-solid fa-calculator"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">Statistical Analysis</span>
+            <ul class="comp-tech-list">
+              <li>A/B Significance Testing</li>
+              <li>Cohort Analysis</li>
+              <li>Variance Modeling (ANOVA)</li>
+              <li>Probability Metrics</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Competency 5 -->
+        <div class="comp-pill" id="comp-reporting">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">Business Reporting</span>
+            <ul class="comp-tech-list">
+              <li>Corporate Decks (C-Suite)</li>
+              <li>Revenue Leak Audits</li>
+              <li>Cost Saving Analysis</li>
+              <li>Strategic Recommendations</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Competency 6 -->
+        <div class="comp-pill" id="comp-etl">
+          <i class="fa-solid fa-shuffle"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">ETL Pipelines</span>
+            <ul class="comp-tech-list">
+              <li>dbt (Data Build Tool)</li>
+              <li>Airflow Workflows</li>
+              <li>Pipeline Scheduling</li>
+              <li>Database Integrations</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Competency 7 -->
+        <div class="comp-pill" id="comp-abtest">
+          <i class="fa-solid fa-flask"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">A/B Testing</span>
+            <ul class="comp-tech-list">
+              <li>Optimizely Integrations</li>
+              <li>Conversion Rate CRO</li>
+              <li>Experimentation Logs</li>
+              <li>Variant Performance</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Competency 8 -->
+        <div class="comp-pill" id="comp-automation">
+          <i class="fa-solid fa-robot"></i>
+          <div class="comp-info-wrapper">
+            <span class="comp-title">Workflow Automation</span>
+            <ul class="comp-tech-list">
+              <li>Python Scripting</li>
+              <li>Advanced Excel VBA</li>
+              <li>Command-Line Cron</li>
+              <li>Automated Alerts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Data Projects Portfolio -->
+  <section id="portfolio" class="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Data Projects Portfolio</h2>
+        <p class="section-subtitle">Real-world projects demonstrating high technical skill and significant operational impact.</p>
+      </div>
+      
+      <!-- Filtering Tabs -->
+      <div class="portfolio-filters" id="filters-container">
+        <button class="filter-btn active" data-filter="all" id="filter-all">ALL PROJECTS</button>
+        <button class="filter-btn" data-filter="sql-python" id="filter-sql-python">SQL & PYTHON</button>
+        <button class="filter-btn" data-filter="bi-dashboards" id="filter-bi-dashboards">BI & DASHBOARDS</button>
+      </div>
+      
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projects-grid-container">
+        <!-- Project 1: IBM Data Analyst Capstone Project -->
+        <div class="dashboard-panel project-card" data-category="sql-python bi-dashboards" id="project-ibm-capstone">
+          <div class="project-img-wrapper">
+            <img src="assets/sales_forecasting_dashboard.png" alt="IBM Data Analyst Capstone Project Mockup" class="project-img">
+            <div class="project-overlay">
+              <a href="https://github.com/thakur05-Analyst/IBM-Data-Analyst-capstone" target="_blank" rel="noopener noreferrer" class="overlay-link" title="View GitHub Repository"><i class="fa-brands fa-github"></i></a>
+              <a href="https://github.com/thakur05-Analyst/IBM-Data-Analyst-capstone" target="_blank" rel="noopener noreferrer" class="overlay-link" title="View Project Notebooks"><i class="fa-solid fa-book-open"></i></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header">
+              <h3 class="project-title">IBM Data Analyst Capstone Project</h3>
+              <div class="project-tags">
+                <span class="tag">SQL</span>
+                <span class="tag">Python</span>
+                <span class="tag">Dashboards</span>
+              </div>
+            </div>
+            
+            <div class="project-problem-solution">
+              <div class="ps-item">
+                <span class="ps-label problem">Business Problem</span>
+                <p class="ps-text">Understanding the end-to-end telemetry lifecycle and synthesizing raw demographic and survey data into clean insights for stakeholder review.</p>
+              </div>
+              <div class="ps-item">
+                <span class="ps-label solution">Data Solution</span>
+                <p class="ps-text">My capstone project for the IBM Data Analyst Professional Certificate. This repository demonstrates a complete data analytics workflow, from data collection and wrangling to exploratory data analysis (EDA). Using Python, SQL, and interactive dashboards, I successfully transformed complex datasets into clear, actionable insights.</p>
+              </div>
+            </div>
+            
+            <div class="project-metrics">
+              <div class="metric-box">
+                <div class="metric-num">IBM</div>
+                <div class="metric-lbl">PROFESSIONAL CERTIFIED</div>
+              </div>
+              <div class="metric-box blue">
+                <div class="metric-num">End-To-End</div>
+                <div class="metric-lbl">DATA ANALYTICS WORKFLOW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Customer Trends Data Analysis Pipeline -->
+        <div class="dashboard-panel project-card" data-category="sql-python bi-dashboards" id="project-customer-trends">
+          <div class="project-img-wrapper">
+            <img src="assets/marketing_attribution_dashboard.png" alt="Customer Trends Data Analysis Dashboard Mockup" class="project-img">
+            <div class="project-overlay">
+              <a href="https://github.com/thakur05-Analyst/customer-trends-data-analysis-SQL-Python-PowerBI" target="_blank" rel="noopener noreferrer" class="overlay-link" title="View GitHub Repository"><i class="fa-brands fa-github"></i></a>
+              <a href="https://github.com/thakur05-Analyst/customer-trends-data-analysis-SQL-Python-PowerBI" target="_blank" rel="noopener noreferrer" class="overlay-link" title="View Dashboard Docs"><i class="fa-solid fa-chart-pie"></i></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header">
+              <h3 class="project-title">Customer Trends<br>Data Analysis<br>Pipeline</h3>
+              <div class="project-tags">
+                <span class="tag">SQL</span>
+                <span class="tag">Python</span>
+                <span class="tag">Power BI</span>
+              </div>
+            </div>
+            
+            <div class="project-problem-solution">
+              <div class="ps-item">
+                <span class="ps-label problem">Business Problem</span>
+                <p class="ps-text">Retail groups frequently struggle with mapping long-term purchasing behavior and lifecycle trends across disconnected transactional databases.</p>
+              </div>
+              <div class="ps-item">
+                <span class="ps-label solution">Data Solution</span>
+                <p class="ps-text">This end-to-end data analytics pipeline uses SQL to extract and clean raw customer transaction data from relational databases. Python is then utilized to perform statistical analysis and RFM customer segmentation. Finally, an interactive Power BI dashboard visualizes key KPIs, providing actionable insights to optimize targeted marketing strategies.</p>
+              </div>
+            </div>
+            
+            <div class="project-metrics">
+              <div class="metric-box">
+                <div class="metric-num">150,000+</div>
+                <div class="metric-lbl">ROWS PROCESSED & FILTERED</div>
+              </div>
+              <div class="metric-box blue">
+                <div class="metric-num">Power BI</div>
+                <div class="metric-lbl">KPI DASHBOARD CONNECTED</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Section 4: Project Enquiry Zone -->
+  <section id="contact" class="lead-gen">
+    <div class="container lead-grid">
+      <div class="lead-content">
+        <div class="lead-badge" id="lead-bonus-badge">
+          <i class="fa-solid fa-handshake"></i> FREELANCE DATA ANALYST
+        </div>
+        <h2 class="lead-title" id="lead-main-title">Let's Work Together</h2>
+        <p class="lead-desc" id="lead-sub-desc">
+          Looking for a Data Analyst to build dashboards, automate reports, analyze data, or create business insights? Fill out the enquiry form and let's discuss your project.
+        </p>
+        
+        <div class="service-cards-grid">
+          <div class="service-card-mini">
+            <i class="fa-solid fa-chart-pie"></i> Power BI Dashboards
+          </div>
+          <div class="service-card-mini">
+            <i class="fa-solid fa-file-excel"></i> Excel Automation
+          </div>
+          <div class="service-card-mini">
+            <i class="fa-solid fa-database"></i> SQL Development
+          </div>
+          <div class="service-card-mini">
+            <i class="fa-brands fa-python"></i> Python Automation
+          </div>
+          <div class="service-card-mini">
+            <i class="fa-solid fa-lightbulb"></i> Business Analytics
+          </div>
+          <div class="service-card-mini">
+            <i class="fa-solid fa-chart-line"></i> Data Visualization
+          </div>
+        </div>
+      </div>
+      
+      <!-- Lead Form Panel -->
+      <div class="dashboard-panel form-panel" id="lead-form-panel">
+        <!-- Overlay for Loading & Success States -->
+        <div class="form-overlay" id="form-overlay-container">
+          <!-- Loading State inside overlay -->
+          <div id="loader-content" style="display: none;">
+            <div class="query-loader"></div>
+            <h3 class="success-title">TRANSMITTING ENQUIRY...</h3>
+            <p class="success-text" style="color: var(--accent-cyan);">Connecting to secure mail server.</p>
+            <div class="console-log" id="console-logs"></div>
+          </div>
+          
+          <!-- Success State inside overlay -->
+          <div id="success-content" style="display: none;">
+            <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+            <h3 class="success-title">Enquiry Sent!</h3>
+            <p class="success-text">Thank you! Your enquiry has been sent successfully. I'll contact you within 24 hours.</p>
+            <button class="btn btn-primary" id="btn-success-reset">Start New Enquiry</button>
+          </div>
+        </div>
+        
+        <div class="form-header">
+          <div class="form-title">
+            <i class="fa-solid fa-envelope-open-text"></i> Project Enquiry
+          </div>
+          <div class="form-console-status">MODE: SECURE_TRANSMISSION</div>
+        </div>
+        
+        <form id="lead-form" class="form-grid" novalidate>
+          <div class="form-group">
+            <label for="user-name" class="form-label">Full Name <span class="required-asterisk">*</span></label>
+            <input type="text" id="user-name" class="form-control" name="user_name" placeholder="John Doe" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="company-name" class="form-label">Company Name <span class="optional-label">(Optional)</span></label>
+            <input type="text" id="company-name" class="form-control" name="company_name" placeholder="Acme Corp">
+          </div>
+          
+          <div class="form-group">
+            <label for="user-email" class="form-label">Email Address <span class="required-asterisk">*</span></label>
+            <input type="email" id="user-email" class="form-control" name="user_email" placeholder="john@company.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone-number" class="form-label">Phone Number <span class="optional-label">(Optional)</span></label>
+            <input type="tel" id="phone-number" class="form-control" name="phone_number" placeholder="+1 (555) 000-0000">
+          </div>
+
+          <div class="form-group full-width-group">
+            <label for="project-type" class="form-label">Project Type <span class="required-asterisk">*</span></label>
+            <select id="project-type" class="form-control form-select" name="project_type" required>
+              <option value="" disabled selected>Select a project type...</option>
+              <option value="Power BI Dashboard">Power BI Dashboard</option>
+              <option value="Excel Automation">Excel Automation</option>
+              <option value="SQL Database/Pipeline">SQL Database/Pipeline</option>
+              <option value="Python Scripting">Python Scripting</option>
+              <option value="Data Analysis/Forecasting">Data Analysis & Forecasting</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group full-width-group">
+            <label for="user-message" class="form-label">Project Description <span class="required-asterisk">*</span></label>
+            <textarea id="user-message" class="form-control" name="message" placeholder="Describe your data needs, current bottlenecks, and desired outcomes..." required></textarea>
+          </div>
+          
+          <div class="form-submit-wrapper full-width-group">
+            <button type="submit" class="btn btn-primary btn-submit" id="btn-submit-form">
+              <i class="fa-solid fa-paper-plane"></i> Send Enquiry
+            </button>
+            <button type="button" id="btn-whatsapp" class="btn btn-whatsapp">
+              <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Footer Column 1 -->
+        <div class="footer-info">
+          <div class="footer-logo">
+            <a href="https://rishik.in" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-chart-line"></i> RISHIK<span>.IN</span>
+            </a>
+          </div>
+          <p class="footer-tagline">
+            Professional analytics and data strategy designed to bridge technology capability and C-suite decision objectives.
+          </p>
+          <div class="footer-socials">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub Profile"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:analyst@example.com" class="social-icon" title="Email Direct"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+        
+        <!-- Footer Column 2 -->
+        <div>
+          <h4 class="footer-links-title">Quick Queries</h4>
+          <ul class="footer-links">
+            <li><a href="#hero" class="footer-link">Dashboard Overview</a></li>
+            <li><a href="#competencies" class="footer-link">Core Competencies</a></li>
+            <li><a href="#portfolio" class="footer-link">Data Projects Portfolio</a></li>
+            <li><a href="#contact" class="footer-link">Lead Gen Console</a></li>
+          </ul>
+        </div>
+        
+        <!-- Footer Column 3 -->
+        <div>
+          <h4 class="footer-links-title">System Properties</h4>
+          <ul class="footer-links" style="font-family: monospace; font-size: 0.8rem; line-height: 1.8;">
+            <li><span style="color: var(--accent-cyan);">STACK:</span> Python 3.10 | SQL (PostgreSQL)</li>
+            <li><span style="color: var(--accent-cyan);">DASHBOARD:</span> Power BI Desktop Pro</li>
+            <li><span style="color: var(--accent-cyan);">DEPLOYMENT:</span> Vercel static pipeline</li>
+            <li><span style="color: var(--accent-cyan);">SSL_SECURITY:</span> SHA-256 active</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom row -->
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Data Analyst Portfolio. All business rights reserved.
+        </div>
+        <div class="footer-meta">
+          <div class="meta-item">
+            <i class="fa-solid fa-server"></i> UPTIME: 99.98%
+          </div>
+          <div class="meta-item">
+            <i class="fa-solid fa-bolt"></i> LATENCY: 4ms
+          </div>
+          <div class="meta-item">
+            <i class="fa-solid fa-database"></i> DB_VER: pg_15.2
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top button -->
+  <button id="scroll-to-top" class="scroll-to-top" title="Scroll to Top" aria-label="Scroll to Top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Javascript File Link -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+// ===================================================================================
+// Project: Supply Chain & Logistics Analytics Dashboard
+// Component: DAX Measures Catalog
+// Description: Central catalog of advanced DAX measures used for KPI calculations,
+//              SLA targets, and rolling averages in Power BI.
+// ===================================================================================
+
+// -----------------------------------------------------------------------------------
+// 1. BASIC OPERATIONAL FACTS
+// -----------------------------------------------------------------------------------
+
+Total Shipments = 
+COUNTROWS(FactShipments)
+
+Total Revenue / Spend (USD) = 
+SUM(FactShipments[FreightCostUSD])
+
+Total Units Shipped = 
+SUM(FactShipments[UnitsShipped])
+
+Average Weight per Shipment (KG) = 
+AVERAGE(FactShipments[ShipmentWeightKG])
+
+
+// -----------------------------------------------------------------------------------
+// 2. CORE LOGISTICS PERFORMANCE INDICATORS (SLA & TIMELINESS)
+// -----------------------------------------------------------------------------------
+
+// OTIF % (On-Time In-Full Ratio)
+// Industry standard metric representing the share of orders delivered:
+//   - On Time (Actual Delivery Date <= Scheduled Delivery Date)
+//   - In Full (No units missing/short-shipped, i.e., IsShortShipped = 0)
+//   - Non-Damaged (IsDamaged = 0)
+OTIF % = 
+VAR TotalDelivered = 
+    CALCULATE(
+        [Total Shipments],
+        NOT(ISBLANK(FactShipments[ActualDeliveryDateKey]))
+    )
+VAR OtifCount = 
+    CALCULATE(
+        [Total Shipments],
+        NOT(ISBLANK(FactShipments[ActualDeliveryDateKey])),
+        FactShipments[IsDelayed] = 0,
+        FactShipments[IsShortShipped] = 0,
+        FactShipments[IsDamaged] = 0
+    )
+RETURN
+    DIVIDE(OtifCount, TotalDelivered, 0)
+
+
+// Average Delivery Delay (Days)
+// Measures the severity of late arrivals for delayed orders.
+Average Delay (Days) = 
+VAR DelayedShipments = 
+    CALCULATE(
+        FactShipments[ShipmentKey],
+        FactShipments[IsDelayed] = 1,
+        NOT(ISBLANK(FactShipments[ActualDeliveryDateKey]))
+    )
+RETURN
+    AVERAGEX(
+        KEEPFILTERS(DelayedShipments),
+        RELATED(DimCalendar[FullDate]) - RELATED(DimCalendar[FullDate]) -- Calculate difference in dates
+    )
+
+
+// -----------------------------------------------------------------------------------
+// 3. TIME INTELLIGENCE & MOVING AVERAGES
+// -----------------------------------------------------------------------------------
+
+// Rolling 30-Day Freight Spend (USD)
+// Smoothes seasonal volume spikes to show spending trends.
+Rolling 30D Spend = 
+VAR MaxDate = MAX(DimCalendar[FullDate])
+RETURN
+    CALCULATE(
+        [Total Revenue / Spend (USD)],
+        DATESINPERIOD(
+            DimCalendar[FullDate],
+            MaxDate,
+            -30,
+            DAY
+        )
+    )
+
+
+// Year-over-Year (YoY) Change in Freight Cost
+// Simple time-intelligence comparison of expenses compared to the previous calendar year.
+YoY Freight Spend Var % = 
+VAR CurrentSpend = [Total Revenue / Spend (USD)]
+VAR PriorYearSpend = 
+    CALCULATE(
+        [Total Revenue / Spend (USD)],
+        SAMEPERIODLASTYEAR(DimCalendar[FullDate])
+    )
+RETURN
+    DIVIDE(
+        CurrentSpend - PriorYearSpend,
+        PriorYearSpend,
+        0
+    )
+
+
+// -----------------------------------------------------------------------------------
+// 4. RANKING & VENDOR METRICS
+// -----------------------------------------------------------------------------------
+
+// Carrier Performance Rank
+// Ranks carriers dynamically inside the visual context based on their OTIF% efficiency score.
+Carrier OTIF Rank = 
+IF(
+    HASONEVALUE(DimCarriers[CarrierName]),
+    RANKX(
+        ALL(DimCarriers),
+        [OTIF %],
+        ,
+        DESC,
+        Dense
+    ),
+    BLANK()
+)
