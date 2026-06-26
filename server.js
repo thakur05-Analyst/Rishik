@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // Serve static frontend files (only locally; Vercel handles this natively)
 if (!process.env.VERCEL) {
-  app.use(express.static(__dirname));
+  app.use(express.static(path.join(__dirname, 'public')));
 }
 
 // Custom memory-based rate limiter middleware
@@ -203,7 +203,7 @@ app.post('/api/submit', rateLimiter, async (req, res) => {
 // Serve index.html as fallback for SPA routing or errors (only locally)
 if (!process.env.VERCEL) {
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 }
 
