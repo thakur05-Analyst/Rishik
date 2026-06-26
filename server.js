@@ -11,8 +11,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// Serve static frontend files
-app.use(express.static(__dirname));
+// Serve static frontend files (only locally; Vercel handles this natively)
+if (!process.env.VERCEL) {
+  app.use(express.static(__dirname));
+}
 
 // Custom memory-based rate limiter middleware
 const ipRequestHistory = {};
@@ -198,10 +200,12 @@ app.post('/api/submit', rateLimiter, async (req, res) => {
   app._router.handle(req, res);
 });
 
-// Serve index.html as fallback for SPA routing or errors
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+// Serve index.html as fallback for SPA routing or errors (only locally)
+if (!process.env.VERCEL) {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  });
+}
 
 // Initialize database and start web server
 async function startServer() {
