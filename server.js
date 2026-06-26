@@ -216,4 +216,10 @@ async function startServer() {
   }
 }
 
-startServer();
+// If running in Vercel, don't start the server directly.
+// Vercel serverless functions will import the 'app' export instead.
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  startServer();
+}

@@ -1,0 +1,4 @@
+node_modules/
+.env
+inquiries_db.json
+.vercel/
