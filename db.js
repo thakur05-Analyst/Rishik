@@ -1,19 +1,20 @@
 const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
+const { logger } = require('./utils/logger');
 
 let pool = null;
 const isPostgres = !!process.env.DATABASE_URL;
 const jsonDbPath = path.join(__dirname, 'inquiries_db.json');
 
 if (isPostgres) {
-  console.log('[DATABASE] DATABASE_URL detected. Configuring PostgreSQL connection pool.');
+  logger.info('[DATABASE] DATABASE_URL detected. Configuring PostgreSQL connection pool.');
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
   });
 } else {
-  console.warn('[DATABASE] DATABASE_URL is not set. Falling back to local JSON database: inquiries_db.json');
+  logger.warn('[DATABASE] DATABASE_URL is not set. Falling back to local JSON database: inquiries_db.json');
 }
 
 async function initDb() {
@@ -23,6 +24,9 @@ async function initDb() {
         id SERIAL PRIMARY KEY,
         stakeholder_name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
+        phone VARCHAR(50),
+        company_name VARCHAR(255),
+        service_required VARCHAR(100),
         message TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         status VARCHAR(50) DEFAULT 'New'
@@ -30,37 +34,37 @@ async function initDb() {
     `;
     try {
       await pool.query(createTableQuery);
-      console.log('[DATABASE] PostgreSQL inquiries table initialized successfully.');
+      logger.info('[DATABASE] PostgreSQL inquiries table initialized successfully.');
     } catch (err) {
-      console.error('[DATABASE] Error initializing PostgreSQL table:', err);
+      logger.error(`[DATABASE] Error initializing PostgreSQL table: ${err.message}`);
       throw err;
     }
   } else {
     // Local JSON DB initialization
     if (!fs.existsSync(jsonDbPath)) {
       fs.writeFileSync(jsonDbPath, JSON.stringify([], null, 2), 'utf8');
-      console.log('[DATABASE] Local JSON database created at inquiries_db.json');
+      logger.info('[DATABASE] Local JSON database created at inquiries_db.json');
     } else {
-      console.log('[DATABASE] Local JSON database loaded.');
+      logger.info('[DATABASE] Local JSON database loaded.');
     }
   }
 }
 
-async function saveInquiry({ stakeholder_name, email, message }) {
+async function saveInquiry({ stakeholder_name, email, phone, company_name, service_required, message }) {
   const createdAt = new Date().toISOString();
   const status = 'New';
 
   if (isPostgres) {
     const insertQuery = `
-      INSERT INTO inquiries (stakeholder_name, email, message, created_at, status)
-      VALUES ($1, $2, $3, NOW(), $4)
+      INSERT INTO inquiries (stakeholder_name, email, phone, company_name, service_required, message, created_at, status)
+      VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7)
       RETURNING *;
     `;
     try {
-      const res = await pool.query(insertQuery, [stakeholder_name, email, message, status]);
+      const res = await pool.query(insertQuery, [stakeholder_name, email, phone, company_name, service_required, message, status]);
       return res.rows[0];
     } catch (err) {
-      console.error('[DATABASE] Error saving inquiry to PostgreSQL:', err);
+      logger.error(`[DATABASE] Error saving inquiry to PostgreSQL: ${err.message}`);
       throw err;
     }
   } else {
@@ -77,6 +81,9 @@ async function saveInquiry({ stakeholder_name, email, message }) {
         id: newId,
         stakeholder_name,
         email,
+        phone,
+        company_name,
+        service_required,
         message,
         created_at: createdAt,
         status
@@ -86,7 +93,7 @@ async function saveInquiry({ stakeholder_name, email, message }) {
       fs.writeFileSync(jsonDbPath, JSON.stringify(data, null, 2), 'utf8');
       return newRecord;
     } catch (err) {
-      console.error('[DATABASE] Error saving inquiry to JSON DB:', err);
+      logger.error(`[DATABASE] Error saving inquiry to JSON DB: ${err.message}`);
       throw err;
     }
   }

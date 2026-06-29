@@ -116,7 +116,7 @@ function initProjectFilters() {
 }
 
 /**
- * 4. Interactive Command-Line Lead Gen Form
+ * 4. Lead Gen Form Submission
  */
 function initFormConsole() {
   const leadForm = document.getElementById('lead-form');
@@ -139,7 +139,7 @@ function initFormConsole() {
     const typeVal = document.getElementById('project-type').value;
     const msgVal = document.getElementById('user-message').value.trim();
     
-    return `Hi Rishik,\n\nI visited your portfolio website and I'm interested in discussing a project.\n\nName: ${nameVal}\nCompany: ${companyVal || 'N/A'}\nEmail: ${emailVal}\nPhone: ${phoneVal || 'N/A'}\nProject Type: ${typeVal || 'N/A'}\n\nProject Description:\n${msgVal}\n\nPlease get back to me when you're available.`;
+    return `Hello Rishik! I found your portfolio and would like to discuss a project with you. Please let me know when you're available.`;
   }
 
   // Handle WhatsApp button click
@@ -207,9 +207,6 @@ function initFormConsole() {
       return;
     }
 
-    // Construct message body for Web3Forms
-    const bodyText = `Name: ${nameVal}\nCompany: ${companyVal || 'N/A'}\nEmail: ${emailVal}\nPhone: ${phoneVal || 'N/A'}\nProject Type: ${typeVal}\n\nProject Description:\n${msgVal}`;
-
     // Lock submit button to prevent duplicate submissions
     submitBtn.disabled = true;
     
@@ -217,127 +214,44 @@ function initFormConsole() {
     overlay.classList.add('active');
     loaderContent.style.display = 'block';
     successContent.style.display = 'none';
+    if(consoleLogs) consoleLogs.style.display = 'none'; // hide fake console
     
-    // Start Web3Forms Dispatch
-    let fetchSuccess = false;
-    let fetchErrorMsg = "";
-    
-    // Web3Forms API Call
-    // NOTE: User must replace 'YOUR_ACCESS_KEY_HERE' with their actual Web3Forms access key
-    fetch('https://api.web3forms.com/submit', {
+    // Our custom backend API endpoint
+    fetch('/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        access_key: "YOUR_ACCESS_KEY_HERE", 
-        subject: "New Project Enquiry from Portfolio Website",
-        from_name: nameVal,
+        name: nameVal,
         email: emailVal,
-        message: bodyText
+        phone: phoneVal,
+        company: companyVal,
+        service: typeVal,
+        message: msgVal
       })
     })
     .then(async (response) => {
       let json = await response.json();
-      if (response.status == 200) {
-        fetchSuccess = true;
+      if (response.status === 200) {
+        // Success
+        loaderContent.style.display = 'none';
+        successContent.style.display = 'block';
+        showToast("Your inquiry has been submitted successfully. I'll contact you soon.", "success");
       } else {
-        fetchErrorMsg = json.message || "Failed to submit.";
+        // Validation or Rate Limit Error
+        overlay.classList.remove('active');
+        submitBtn.disabled = false;
+        showToast(json.message || "Failed to submit. Please try again.", "error");
       }
     })
     .catch(error => {
-      fetchErrorMsg = error.message || "Connection refused.";
+      // Network Error
+      overlay.classList.remove('active');
+      submitBtn.disabled = false;
+      showToast("Network error. Please try again later.", "error");
     });
-    
-    // Initial logs sequence before API response resolves
-    const initialLogs = [
-      `[SYS_KERN] Establishing secure handshake with Mail Server...`,
-      `[PROCESS] Validating enquiry parameters...`,
-      `[PROCESS] SUCCESS: Syntax verified.`,
-      `[MAIL_SYS] Dispatching payload to secure inbox...`
-    ];
-    
-    consoleLogs.innerHTML = '';
-    let logIndex = 0;
-    
-    function printNextLog() {
-      if (logIndex < initialLogs.length) {
-        appendLogLine(initialLogs[logIndex]);
-        logIndex++;
-        setTimeout(printNextLog, 200 + Math.random() * 150);
-      } else {
-        // Await server response to print resolution logs
-        awaitServerResponse();
-      }
-    }
-    
-    function appendLogLine(text, isError = false, isSuccess = false, isCmd = false) {
-      const line = document.createElement('div');
-      line.textContent = text;
-      if (isError || text.includes('ERROR') || text.includes('ERR')) {
-        line.style.color = 'var(--accent-rose)';
-      } else if (isSuccess || text.includes('SUCCESS')) {
-        line.style.color = 'var(--accent-emerald)';
-      } else if (isCmd || text.includes('SYS_KERN')) {
-        line.style.color = 'var(--accent-cyan)';
-      }
-      consoleLogs.appendChild(line);
-      consoleLogs.scrollTop = consoleLogs.scrollHeight;
-    }
-    
-    function awaitServerResponse() {
-      if (fetchSuccess) {
-        // Print success logs sequentially
-        const successLogs = [
-          `[MAIL_SYS] SUCCESS: Payload accepted by upstream server.`,
-          `[SYS_KERN] Transmission committed. Cleaning stack buffers. Done.`
-        ];
-        
-        let succIndex = 0;
-        function printSuccess() {
-          if (succIndex < successLogs.length) {
-            appendLogLine(successLogs[succIndex]);
-            succIndex++;
-            setTimeout(printSuccess, 150 + Math.random() * 150);
-          } else {
-            // Success transition after a short delay
-            setTimeout(() => {
-              loaderContent.style.display = 'none';
-              successContent.style.display = 'block';
-              showToast("Your inquiry has been submitted successfully. I'll contact you soon.", "success");
-            }, 600);
-          }
-        }
-        printSuccess();
-        
-      } else if (fetchErrorMsg) {
-        // Print error logs
-        appendLogLine(`[PROCESS] ERROR: Validation or transmission exception raised.`, true);
-        appendLogLine(`[SYS_ERR] Gateway failed: ${fetchErrorMsg}`, true);
-        appendLogLine(`[SYS_KERN] Transaction aborted.`, true);
-        
-        const retryLine = document.createElement('div');
-        retryLine.innerHTML = `<button class="btn btn-secondary" style="margin-top: 1rem; font-size: 0.75rem; padding: 0.25rem 0.5rem;" id="btn-dismiss-retry">Dismiss & Retry</button>`;
-        consoleLogs.appendChild(retryLine);
-        consoleLogs.scrollTop = consoleLogs.scrollHeight;
-        
-        // Wire up retry listener (do not clear form)
-        document.getElementById('btn-dismiss-retry').addEventListener('click', () => {
-          overlay.classList.remove('active');
-          submitBtn.disabled = false;
-        });
-        
-        showToast(`Submission failed: ${fetchErrorMsg}`, "error");
-        
-      } else {
-        // Wait and check again
-        setTimeout(awaitServerResponse, 100);
-      }
-    }
-    
-    // Start logging sequence
-    printNextLog();
   });
   
   // Success Reset logic
@@ -345,7 +259,7 @@ function initFormConsole() {
     overlay.classList.remove('active');
     loaderContent.style.display = 'none';
     successContent.style.display = 'none';
-    consoleLogs.innerHTML = '';
+    if(consoleLogs) consoleLogs.innerHTML = '';
     
     // Clear form inputs and restore submit button
     leadForm.reset();
@@ -403,7 +317,7 @@ function showToast(message, type = 'success') {
 }
 
 /**
- * 5. Page Up / Scroll-To-Top Toggler (Dogler)
+ * 5. Page Up / Scroll-To-Top Toggler
  */
 function initScrollToTop() {
   const scrollTopBtn = document.getElementById('scroll-to-top');
@@ -426,4 +340,3 @@ function initScrollToTop() {
     });
   });
 }
-
