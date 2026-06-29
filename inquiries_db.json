@@ -124,5 +124,71 @@
     "message": "i need you to be here",
     "created_at": "2026-06-29T08:34:59.806Z",
     "status": "New"
+  },
+  {
+    "id": 16,
+    "stakeholder_name": "cvbn",
+    "email": "trippanda12@gmail.com",
+    "phone": "9703051593",
+    "company_name": "n",
+    "service_required": "SQL Database&#x2F;Pipeline",
+    "message": "2 months with good stiphend",
+    "created_at": "2026-06-29T09:49:01.296Z",
+    "status": "New"
+  },
+  {
+    "id": 17,
+    "stakeholder_name": "rishk",
+    "email": "rishikvirat773@gmail.com",
+    "phone": "+919640929350",
+    "company_name": "abn",
+    "service_required": "Python Scripting",
+    "message": "hisuqs uqsbqs  uqs",
+    "created_at": "2026-06-29T10:14:17.078Z",
+    "status": "New"
+  },
+  {
+    "id": 18,
+    "stakeholder_name": "rishk",
+    "email": "rishikvirat773@gmail.com",
+    "phone": "+919640929350",
+    "company_name": "abn",
+    "service_required": "Python Scripting",
+    "message": "i need coffee",
+    "created_at": "2026-06-29T10:33:36.059Z",
+    "status": "New"
+  },
+  {
+    "id": 19,
+    "stakeholder_name": "rishk",
+    "email": "nityanayak7220@gmail.com",
+    "phone": "9827975789",
+    "company_name": "abn",
+    "service_required": "Data Analysis&#x2F;Forecasting",
+    "message": "I have a requirement",
+    "created_at": "2026-06-29T11:32:38.728Z",
+    "status": "New"
+  },
+  {
+    "id": 20,
+    "stakeholder_name": "cvbn",
+    "email": "rishikvirat773@gmail.com",
+    "phone": "9703051593",
+    "company_name": "n",
+    "service_required": "Power BI Dashboard",
+    "message": "i need a perfect guy to bulid this",
+    "created_at": "2026-06-29T11:41:33.846Z",
+    "status": "New"
+  },
+  {
+    "id": 21,
+    "stakeholder_name": "cvbn",
+    "email": "rishikvirat773@gmail.com",
+    "phone": "9703051593",
+    "company_name": "n",
+    "service_required": "Excel Automation",
+    "message": "Looking for a Data Analyst to build dashboards, automate reports, analyze data, or create business insights? Fill out the enquiry form and let&#x27;s discuss your project.",
+    "created_at": "2026-06-29T11:49:42.361Z",
+    "status": "New"
   }
 ]
