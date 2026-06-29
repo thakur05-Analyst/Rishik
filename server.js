@@ -27,20 +27,13 @@ const path = require('path');
 app.use('/api/contact', contactRoutes);
 app.use('/api', statusRoutes);
 
-// Serve static frontend files (only locally)
-if (!process.env.VERCEL) {
-  app.use(express.static(path.join(__dirname, 'public')));
-  
-  // Serve index.html as fallback for SPA routing
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
-} else {
-  // Unmatched routes handler for API in Vercel
-  app.use('*', (req, res) => {
-    res.status(404).json({ success: false, message: 'API Endpoint Not Found' });
-  });
-}
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve index.html as fallback for SPA routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Centralized Error Handling Middleware
 app.use(errorHandler);
