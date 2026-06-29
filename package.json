@@ -2,8 +2,9 @@
   "name": "portfolio-backend",
   "version": "1.0.0",
   "description": "Production contact form backend for Rishik.in",
+  "main": "server.js",
   "scripts": {
-    "start-local": "node server.js",
+    "start": "node server.js",
     "dev": "node server.js"
   },
   "dependencies": {
